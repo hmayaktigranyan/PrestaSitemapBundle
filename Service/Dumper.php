@@ -171,7 +171,7 @@ class Dumper extends AbstractGenerator implements DumperInterface
                     );
                 }
                 $lastmod = new \DateTime($child->lastmod);
-                $urlsets[$basename] = $this->newUrlset($basename, $lastmod);
+                $urlsets[$basename] = $this->newUrlsetGz($basename, $lastmod);
             }
         }
 
@@ -233,6 +233,10 @@ class Dumper extends AbstractGenerator implements DumperInterface
      * @return DumpingUrlset
      */
     protected function newUrlset($name, \DateTime $lastmod = null)
+    {
+        return new DumpingUrlset($this->baseUrl . $this->sitemapFilePrefix . '.' . $name . '.xml', $lastmod);
+    }
+    protected function newUrlsetGz($name, \DateTime $lastmod = null)
     {
         return new DumpingUrlset($this->baseUrl . $this->sitemapFilePrefix . '.' . $name . '.xml.gz', $lastmod);
     }
